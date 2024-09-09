@@ -248,18 +248,17 @@ tag to tell browsers to render the gaps.
           <input type="number"
                 id="wd-text-fields-salary-start"
                 placeholder="1000"
-                value="100000"/><br/>
+                min="50000"
+                max="1000000"/><br/>
 
           <label htmlFor="wd-text-fields-rating"> Rating: </label>
           <input type="range" id="wd-text-fields-rating"
                 placeholder="Doe"
-                max="5"
-                value="4"/><br/>
+                max="5"/><br/>
 
           <label htmlFor="wd-text-fields-dob"> Date of birth: </label>
           <input type="date"
-                id="wd-text-fields-dob"
-                value="2000-01-21"/><br/>
+                id="wd-text-fields-dob"/><br/>
         </form>
       </div>
       <h4>Anchor tag</h4>
