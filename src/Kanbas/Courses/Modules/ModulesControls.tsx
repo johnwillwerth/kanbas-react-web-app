@@ -2,12 +2,9 @@ import { FaPlus } from "react-icons/fa6";
 import GreenCheckmark from "./GreenCheckmark";
 export default function ModulesControls() {
   return (
-    <div id="wd-modules-controls" className="text-nowrap">
-      <button id="wd-add-module-btn" className="btn btn-lg btn-danger me-1 float-end">
-        <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
-        Module</button>
+    <div id="wd-modules-controls" className="d-flex justify-content-end align-items-center gap-2 flex-wrap">
       <div className="dropdown d-inline me-1 float-end">
-        <button id="wd-publish-all-btn" className="btn btn-lg btn-secondary dropdown-toggle"
+        <button id="wd-publish-all-btn" className="btn btn-lg btn-secondary dropdown-toggle me-2"
           type="button" data-bs-toggle="dropdown">
           <GreenCheckmark />
           Publish All</button>
@@ -33,14 +30,17 @@ export default function ModulesControls() {
               Unpublish modules only</a>
           </li>
         </ul>
-        <button id="wd-view-progress" className="btn btn-lg btn-secondary dropdown-toggle"
+        <button id="wd-view-progress" className="btn btn-lg btn-secondary dropdown-toggle me-2"
           type="button" data-bs-toggle="dropdown">
           <GreenCheckmark />
           View Progress</button>
-        <button id="wd-collapse-all" className="btn btn-lg btn-secondary dropdown-toggle"
+        <button id="wd-collapse-all" className="btn btn-lg btn-secondary dropdown-toggle me-2"
           type="button" data-bs-toggle="dropdown">
           <GreenCheckmark />
           Collapse All</button>
+        <button id="wd-add-module-btn" className="btn btn-lg btn-danger">
+          <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
+          Module</button>
       </div>
     </div>
 );}
