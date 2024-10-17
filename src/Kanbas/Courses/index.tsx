@@ -5,7 +5,7 @@ import Assignments from "./Assignments";
 import AssignmentEditor from "./Assignments/Editor";
 import PeopleTable from "./People/Table";
 import { courses } from "../Database";
-import { Navigate, Route, Routes, useParams } from "react-router";
+import { Navigate, Route, Routes, useParams, useLocation } from "react-router";
 import { FaAlignJustify } from "react-icons/fa";
 export default function Courses() {
     const { cid } = useParams();

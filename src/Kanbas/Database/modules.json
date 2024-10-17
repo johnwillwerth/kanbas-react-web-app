@@ -1,0 +1,554 @@
+[
+    {
+      "_id": "M101",
+      "name": "Introduction to Rocket Propulsion",
+      "description": "Basic principles of rocket propulsion and rocket engines.",
+      "course": "RS101",
+      "lessons": [
+        {
+          "_id": "L101",
+          "name": "History of Rocketry",
+          "description": "A brief history of rocketry and space exploration.",
+          "module": "M101"
+        },
+        {
+          "_id": "L102",
+          "name": "Rocket Propulsion Fundamentals",
+          "description": "Basic principles of rocket propulsion.",
+          "module": "M101"
+        },
+        {
+          "_id": "L103",
+          "name": "Rocket Engine Types",
+          "description": "Overview of different types of rocket engines.",
+          "module": "M101"
+        }
+      ]
+    },
+    {
+      "_id": "M102",
+      "name": "Fuel and Combustion",
+      "description": "Understanding rocket fuel, combustion processes, and efficiency.",
+      "course": "RS101",
+      "lessons": [
+        {
+          "_id": "L201",
+          "name": "Rocket Fuel",
+          "description": "Overview of different types of rocket fuels.",
+          "module": "M102"
+        },
+        {
+          "_id": "L202",
+          "name": "Combustion Processes",
+          "description": "Understanding combustion processes and efficiency.",
+          "module": "M102"
+        },
+        {
+          "_id": "L203",
+          "name": "Combustion Instability",
+          "description": "Understanding combustion instability and mitigation.",
+          "module": "M102"
+        }
+      ]
+    },
+    {
+      "_id": "M103",
+      "name": "Nozzle Design",
+      "description": "Principles of rocket nozzle design and performance optimization.",
+      "course": "RS101",
+      "lessons": [
+        {
+          "_id": "L301",
+          "name": "Nozzle Design",
+          "description": "Overview of different types of rocket nozzles.",
+          "module": "M103"
+        },
+        {
+          "_id": "L302",
+          "name": "Nozzle Performance",
+          "description": "Understanding nozzle performance and efficiency.",
+          "module": "M103"
+        },
+        {
+          "_id": "L303",
+          "name": "Nozzle Optimization",
+          "description": "Optimizing nozzle design for specific applications.",
+          "module": "M103"
+        }
+      ]
+    },
+  
+    {
+      "_id": "M201",
+      "name": "Fundamentals of Aerodynamics",
+      "description": "Basic aerodynamic concepts and fluid dynamics principles.",
+      "course": "RS102",
+      "lessons": [
+        {
+          "_id": "L101",
+          "name": "Historic Concepts",
+          "description": "Overview of historic aerodynamic concepts.",
+          "module": "M201"
+        },
+        {
+          "_id": "L102",
+          "name": "Modern Concepts",
+          "description": "Overview of modern aerodynamic concepts.",
+          "module": "M201"
+        },
+        {
+          "_id": "L103",
+          "name": "Fluid Dynamics",
+          "description": "Overview of fluid dynamics principles.",
+          "module": "M201"
+        }
+      ]
+    },
+    {
+      "_id": "M202",
+      "name": "Subsonic and Supersonic Flow",
+      "description": "Understanding subsonic and supersonic aerodynamic behaviors.",
+      "course": "RS102",
+      "lessons": [
+        {
+          "_id": "L201",
+          "name": "Subsonic Behavior",
+          "description": "Overview of subsonic behavior.",
+          "module": "M202"
+        },
+        {
+          "_id": "L202",
+          "name": "Supersonic Behavior",
+          "description": "Overview of supersonic behavior.",
+          "module": "M202"
+        },
+        {
+          "_id": "L203",
+          "name": "Comparison of Subsonic and Supersonic Behaviors",
+          "description": "Comparing key differences between subsonic and supersonic behaviors.",
+          "module": "M202"
+        }
+      ]
+    },
+    {
+      "_id": "M203",
+      "name": "Aerodynamic Heating",
+      "description": "Study of aerodynamic heating and thermal protection systems.",
+      "course": "RS102",
+      "lessons": [
+        {
+          "_id": "L301",
+          "name": "Aerodynamic Heating",
+          "description": "Overview of modern aerodynamic heating.",
+          "module": "M203"
+        },
+        {
+          "_id": "L302",
+          "name": "Thermal Protection Systems",
+          "description": "Overview of modern thermal protection systems.",
+          "module": "M203"
+        },
+        {
+          "_id": "L303",
+          "name": "Historic Heating Concepts",
+          "description": "Overview of historic aerodynamic heating concepts.",
+          "module": "M203"
+        }
+      ]
+    },
+
+    {
+      "_id": "M301",
+      "name": "Spacecraft Structural Design",
+      "description": "Fundamentals of designing spacecraft structures and materials selection.",
+      "course": "RS103",
+      "lessons": [
+        {
+          "_id": "L101",
+          "name": "Spacecraft Designs",
+          "description": "Overview of popular spacecraft designs.",
+          "module": "M301"
+        },
+        {
+          "_id": "L102",
+          "name": "Spacecraft Structures",
+          "description": "Basics of designing spacecract structures.",
+          "module": "M301"
+        },
+        {
+          "_id": "L103",
+          "name": "Spacecraft Materials",
+          "description": "Overview of choosing appropriate materials for designing spacecraft structures.",
+          "module": "M301"
+        }
+      ]
+    },
+    {
+      "_id": "M302",
+      "name": "Orbital Mechanics",
+      "description": "Understanding orbital dynamics and mission planning.",
+      "course": "RS103",
+      "lessons": [
+        {
+          "_id": "L201",
+          "name": "Orbital Dynamics",
+          "description": "Overview of orbital dynamics.",
+          "module": "M302"
+        },
+        {
+          "_id": "L202",
+          "name": "Mission Planning",
+          "description": "Overview of mission planning.",
+          "module": "M302"
+        },
+        {
+          "_id": "L203",
+          "name": "Math Refresher",
+          "description": "A crash course on the necessary math for orbital dynamics.",
+          "module": "M302"
+        }
+      ]
+    },
+    {
+      "_id": "M303",
+      "name": "Spacecraft Systems Engineering",
+      "description": "Overview of spacecraft systems and subsystems engineering.",
+      "course": "RS103",
+      "lessons": [
+        {
+          "_id": "L301",
+          "name": "Spacecraft Systems",
+          "description": "Overview of general spacecraft systems.",
+          "module": "M303"
+        },
+        {
+          "_id": "L302",
+          "name": "Subsystem Engineering",
+          "description": "Overview of subsystem engineering.",
+          "module": "M303"
+        },
+        {
+          "_id": "L303",
+          "name": "Advanced Engineering",
+          "description": "An introduction into advanced engineering.",
+          "module": "M303"
+        }
+      ]
+    },
+
+    {
+      "_id": "M401",
+      "name": "The Language of the Elves",
+      "description": "A study of language in the beginning.",
+      "course": "RS104",
+      "lessons": [
+        {
+          "_id": "L101",
+          "name": "Origins 1",
+          "description": "An introduction to the language of the elves.",
+          "module": "M401"
+        },
+        {
+          "_id": "L102",
+          "name": "Origins 2",
+          "description": "Advanced literature on the Elven language.",
+          "module": "M401"
+        },
+        {
+          "_id": "L103",
+          "name": "The Language of Mordor",
+          "description": "A study of the Black Speech.",
+          "module": "M401"
+        }
+      ]
+    },
+    {
+      "_id": "M402",
+      "name": "The Language of the Dwarves",
+      "description": "A study of language inside the mountains.",
+      "course": "RS104",
+      "lessons": [
+        {
+          "_id": "L201",
+          "name": "Origins 3",
+          "description": "An introduction into the Dwarven language.",
+          "module": "M402"
+        },
+        {
+          "_id": "L202",
+          "name": "Origins 4",
+          "description": "Advanced literature on Dwarven script.",
+          "module": "M402"
+        },
+        {
+          "_id": "L203",
+          "name": "Elves and Dwarves",
+          "description": "Overview of the relationship between elves and dwarves.",
+          "module": "M402"
+        }
+      ]
+    },
+    {
+      "_id": "M403",
+      "name": "Valinor",
+      "description": "A peek into life of the immortal Valar.",
+      "course": "RS104",
+      "lessons": [
+        {
+          "_id": "L301",
+          "name": "The Land Across the Sea",
+          "description": "An introduction to Valinor.",
+          "module": "M403"
+        },
+        {
+          "_id": "L302",
+          "name": "The Yavanna",
+          "description": "An overview of the Yavannan culture.",
+          "module": "M403"
+        },
+        {
+          "_id": "L303",
+          "name": "Melkor",
+          "description": "An overview of the evil Melkor.",
+          "module": "M403"
+        }
+      ]
+    },
+
+    {
+      "_id": "M501",
+      "name": "Wizards",
+      "description": "A look into the diplomacy of wizards.",
+      "course": "RS105",
+      "lessons": [
+        {
+          "_id": "L101",
+          "name": "Wizards in the First Age",
+          "description": "An overview of the relationship between wizards and other species in the First Age.",
+          "module": "M501"
+        },
+        {
+          "_id": "L102",
+          "name": "Wizards in the Second Age",
+          "description": "An overview of the relationship between wizards and other species in the Second Age.",
+          "module": "M501"
+        },
+        {
+          "_id": "L103",
+          "name": "Wizards in the Third Age",
+          "description": "An overview of the relationship between wizards and other species in the Third Age.",
+          "module": "M501"
+        }
+      ]
+    },
+    {
+      "_id": "M502",
+      "name": "Elves",
+      "description": "A look into the diplomacy of elves.",
+      "course": "RS105",
+      "lessons": [
+        {
+          "_id": "L201",
+          "name": "Elves in the First Age",
+          "description": "An overview of the relationship between elves and other species in the First Age.",
+          "module": "M502"
+        },
+        {
+          "_id": "L202",
+          "name": "Elves in the Second Age",
+          "description": "An overview of the relationship between elves and other species in the Second Age.",
+          "module": "M502"
+        },
+        {
+          "_id": "L203",
+          "name": "Elves in the Third Age",
+          "description": "An overview of the relationship between elves and other species in the Third Age.",
+          "module": "M502"
+        }
+      ]
+    },
+    {
+      "_id": "M503",
+      "name": "Men",
+      "description": "A look into the diplomacy of men.",
+      "course": "RS105",
+      "lessons": [
+        {
+          "_id": "L301",
+          "name": "Men in the First Age",
+          "description": "An overview of the relationship between men and other species in the First Age.",
+          "module": "M503"
+        },
+        {
+          "_id": "L302",
+          "name": "Men in the Second Age",
+          "description": "An overview of the relationship between men and other species in the Second Age.",
+          "module": "M503"
+        },
+        {
+          "_id": "L303",
+          "name": "Men in the Third Age",
+          "description": "An overview of the relationship between men and other species in the Third Age.",
+          "module": "M503"
+        }
+      ]
+    },
+
+    {
+      "_id": "M601",
+      "name": "Early History of Middle-earth Magic",
+      "description": "A look into the beginning of magic.",
+      "course": "RS106",
+      "lessons": [
+        {
+          "_id": "L101",
+          "name": "First Wizards",
+          "description": "An introduction the first wizards.",
+          "module": "M601"
+        },
+        {
+          "_id": "L102",
+          "name": "Early Defensive Magic",
+          "description": "An introduction into early defensive magic.",
+          "module": "M601"
+        },
+        {
+          "_id": "L103",
+          "name": "Early Offensive Magic",
+          "description": "An introduction into early offensive magic.",
+          "module": "M601"
+        }
+      ]
+    },
+    {
+      "_id": "M602",
+      "name": "The Development of Advanced Magic",
+      "description": "A look into how magic advanced over the years.",
+      "course": "RS106",
+      "lessons": [
+        {
+          "_id": "L201",
+          "name": "Magic for Good",
+          "description": "An overview of how magic was used for the good of the people.",
+          "module": "M602"
+        },
+        {
+          "_id": "L202",
+          "name": "Dark Magic",
+          "description": "An overview of how magic was twisted for evil purposes.",
+          "module": "M602"
+        },
+        {
+          "_id": "L203",
+          "name": "Magical spells",
+          "description": "A study of some of the more advanced magical spells.",
+          "module": "M602"
+        }
+      ]
+    },
+    {
+      "_id": "M603",
+      "name": "The Evolution of Magic Following the Creation of Mordor",
+      "description": "A study of how magic evolved after Mordor was created.",
+      "course": "RS106",
+      "lessons": [
+        {
+          "_id": "L301",
+          "name": "Good and Evil",
+          "description": "An overview of sorcery against orcs.",
+          "module": "M603"
+        },
+        {
+          "_id": "L302",
+          "name": "Sauron and the Rings",
+          "description": "An overview of how Sauron became the Lord of the Rings.",
+          "module": "M603"
+        },
+        {
+          "_id": "L303",
+          "name": "Gandalf",
+          "description": "A study of Gandalf's overall impact on the evolution of magic.",
+          "module": "M603"
+        }
+      ]
+    },
+
+    {
+      "_id": "M701",
+      "name": "Early American Education",
+      "description": "A study of education after the birth of the United States of America.",
+      "course": "RS107",
+      "lessons": [
+        {
+          "_id": "L101",
+          "name": "Education for Men",
+          "description": "An overview of the education received by men in early America.",
+          "module": "M701"
+        },
+        {
+          "_id": "L102",
+          "name": "Education for Women",
+          "description": "An overview of the education received by women in early America.",
+          "module": "M701"
+        },
+        {
+          "_id": "L103",
+          "name": "Education for Slaves",
+          "description": "An overview of the education received by slaves in early America.",
+          "module": "M701"
+        }
+      ]
+    },
+    {
+      "_id": "M702",
+      "name": "Civil Rights and Education",
+      "description": "A look into how education changed during the Civil Rights movement.",
+      "course": "RS107",
+      "lessons": [
+        {
+          "_id": "L201",
+          "name": "Discrimination and Segregation",
+          "description": "A look into the segregated school structure.",
+          "module": "M702"
+        },
+        {
+          "_id": "L202",
+          "name": "Educational Integration",
+          "description": "A look into newly integrated school structures.",
+          "module": "M702"
+        },
+        {
+          "_id": "L203",
+          "name": "Change is Slow",
+          "description": "An overview of how segregation still existed.",
+          "module": "M702"
+        }
+      ]
+    },
+    {
+      "_id": "M703",
+      "name": "Modern Democratic Education",
+      "description": "A broad overview of education in today's society.",
+      "course": "RS107",
+      "lessons": [
+        {
+          "_id": "L301",
+          "name": "Diverse Education",
+          "description": "An overview of the push for diversity and inclusion in education.",
+          "module": "M703"
+        },
+        {
+          "_id": "L302",
+          "name": "Community College Availability",
+          "description": "A demonstration of how some states have push for free community college and the overall effects on society.",
+          "module": "M703"
+        },
+        {
+          "_id": "L303",
+          "name": "Education and Work",
+          "description": "A study of how the requirement for higher degrees has impacted life in America.",
+          "module": "M703"
+        }
+      ]
+    }
+  ]
