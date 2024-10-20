@@ -1,9 +1,10 @@
-import { courses } from "../Database";
+import { assignments, courses } from "../Database";
 import { Link, useLocation, useParams } from "react-router-dom";
 
 export default function CoursesNavigation() {
-  const { cid } = useParams();
+  const { aid, cid } = useParams();
   const course = courses.find((course) => course._id === cid);
+  const assignment = assignments.find((assignment) => assignment._id === aid);
   const { pathname } = useLocation();
 
   const links = [
@@ -12,7 +13,6 @@ export default function CoursesNavigation() {
     { label: "Piazza",      path: `/Kanbas/Courses/${cid}/Piazza` },
     { label: "Zoom",        path: `/Kanbas/Courses/${cid}/Zoom` },
     { label: "Assignments", path: `/Kanbas/Courses/${cid}/Assignments` },
-    { label: "Editor",      path: `/Kanbas/Courses/${cid}/Assignments/$` },
     { label: "Quizzes",     path: `/Kanbas/Courses/${cid}/Quizzes` },
     { label: "Grades",      path: `/Kanbas/Courses/${cid}/Grades` },
     { label: "People",      path: `/Kanbas/Courses/${cid}/People` },
