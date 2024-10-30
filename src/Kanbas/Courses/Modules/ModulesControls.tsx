@@ -1,16 +1,20 @@
 import { FaPlus } from "react-icons/fa6";
 import ModuleEditor from "./ModuleEditor";
 import GreenCheckmark from "./GreenCheckmark";
+import ProtectedContent from "../../Account/ProtectedContent";
+
 export default function ModulesControls(
 { moduleName, setModuleName, addModule }:
 { moduleName: string; setModuleName: (title: string) => void; addModule: () => void; }) {
   return (
     <div id="wd-modules-controls" className="d-flex justify-content-end align-items-center gap-2 flex-wrap pb-4">
       <div className="dropdown d-inline me-1 float-end">
-        <button id="wd-publish-all-btn" className="btn btn-lg btn-secondary dropdown-toggle me-2"
-          type="button" data-bs-toggle="dropdown">
-          <GreenCheckmark />
-          Publish All</button>
+        <ProtectedContent>
+          <button id="wd-publish-all-btn" className="btn btn-lg btn-secondary dropdown-toggle me-2"
+            type="button" data-bs-toggle="dropdown">
+            <GreenCheckmark />
+            Publish All</button>
+        </ProtectedContent>
         <ul className="dropdown-menu">
           <li>
             <a id="wd-publish-all-modules-and-items-btn" className="dropdown-item" href="#">
@@ -41,12 +45,14 @@ export default function ModulesControls(
           type="button" data-bs-toggle="dropdown">
           <GreenCheckmark />
           Collapse All</button>
-        <button id="wd-add-module-btn" className="btn btn-lg btn-danger"
-          data-bs-toggle="modal" data-bs-target="#wd-add-module-dialog">
-          <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
-          Module</button>
-        <ModuleEditor dialogTitle="Add Module" moduleName={moduleName}
-          setModuleName={setModuleName} addModule={addModule} />
+        <ProtectedContent>
+          <button id="wd-add-module-btn" className="btn btn-lg btn-danger"
+            data-bs-toggle="modal" data-bs-target="#wd-add-module-dialog">
+            <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
+            Module</button>
+          <ModuleEditor dialogTitle="Add Module" moduleName={moduleName}
+            setModuleName={setModuleName} addModule={addModule} />
+        </ProtectedContent>
       </div>
     </div>
 );}

@@ -1,5 +1,6 @@
 import { FaPlus } from "react-icons/fa6";
 import { RxMagnifyingGlass } from "react-icons/rx";
+import ProtectedContent from "../../Account/ProtectedContent";
 
 export default function AssignmentControls() {
   return (
@@ -27,6 +28,7 @@ export default function AssignmentControls() {
       </div>
 
       {/* Buttons */}
+      <ProtectedContent>
       <div className="d-flex">
         <button id="wd-add-assignment-btn" className="btn btn-lg btn-danger me-1">
           <FaPlus className="position-relative me-2" style={{ bottom: "2px" }} />
@@ -37,6 +39,7 @@ export default function AssignmentControls() {
           Group
         </button>
       </div>
+      </ProtectedContent>
     </div>
   );
 }

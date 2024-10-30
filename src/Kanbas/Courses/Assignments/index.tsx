@@ -3,8 +3,10 @@ import { IoEllipsisVertical } from "react-icons/io5";
 import { PiNotePencilDuotone } from "react-icons/pi";
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import { useState } from 'react';
+import { useSelector } from "react-redux";
 import AssignmentControls from "./AssignmentControls";
 import AssignmentControlButtons from "./AssignmentControlButtons";
+import ProtectedContent from "../../Account/ProtectedContent";
 import * as db from "../../Database";
 import { Link, useParams } from "react-router-dom";
 
@@ -17,6 +19,8 @@ export default function Assignments() {
 
   const { cid } = useParams();
   const { assignments } = db;
+
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
 
   // Filter assignments based on the course ID from the URL params
   const courseAssignments = assignments.filter((assignment) => assignment.course === cid);
@@ -53,10 +57,21 @@ export default function Assignments() {
                           <PiNotePencilDuotone className="me-2 fs-5" />
                         </button>
                         <span>
-                          <Link to={`/Kanbas/Courses/${assignment.course}/Assignments/Editor`} id="wd-course-assignment-editor-link"
-                            className="list-group-item border border-0" style={{ padding: '0', marginBottom: '0.5rem' }}>
-                            <span style={{ fontWeight: 'bold', fontSize: '24px' }}>{assignment._id}</span>
-                          </Link>
+
+                          {/* Ensures assignment ID only links to editor page for faculty, otherwise displaying plaintext */}
+                          {currentUser?.role === "FACULTY" ? (
+                            <ProtectedContent>
+                              <Link to={`/Kanbas/Courses/${assignment.course}/Assignments/Editor`} id="wd-course-assignment-editor-link"
+                                className="list-group-item border border-0" style={{ padding: '0', marginBottom: '0.5rem' }}>
+                                <span style={{ fontWeight: 'bold', fontSize: '24px' }}>{assignment._id}</span>
+                              </Link>
+                            </ProtectedContent>
+                          ) : (
+                            <span id="wd-course-assignment-id" className="list-group-item border border-0" 
+                              style={{ padding: '0', marginBottom: '0.5rem', fontWeight: 'bold', fontSize: '24px' }}> {assignment._id}
+                            </span>
+                          )}
+
                           <div style={{ marginTop: '0.5rem' }}>
                             <span style={{ fontWeight: 'bold', color: 'red' }}>Multiple Modules</span> |
                             <span style={{ fontWeight: 'bold' }}> Not available until </span>

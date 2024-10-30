@@ -1,3 +1,5 @@
+import ProtectedContent from "../../Account/ProtectedContent";
+
 export default function ModuleEditor({ dialogTitle, moduleName, setModuleName, addModule }:
 { dialogTitle: string; moduleName: string; setModuleName: (name: string) => void; addModule: () => void; }) {
     return (
@@ -14,10 +16,12 @@ export default function ModuleEditor({ dialogTitle, moduleName, setModuleName, a
                             onChange={(e) => setModuleName(e.target.value)}/>
                     </div>
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">
-                            Cancel </button>
-                        <button onClick={addModule} type="button" data-bs-dismiss="modal" className="btn btn-danger">
-                            Add Module </button>
+                        <ProtectedContent>
+                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">
+                                Cancel </button>
+                            <button onClick={addModule} type="button" data-bs-dismiss="modal" className="btn btn-danger">
+                                Add Module </button>
+                        </ProtectedContent>
                     </div>
                 </div>
             </div>
