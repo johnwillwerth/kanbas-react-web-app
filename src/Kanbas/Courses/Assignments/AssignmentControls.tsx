@@ -1,8 +1,17 @@
 import { FaPlus } from "react-icons/fa6";
 import { RxMagnifyingGlass } from "react-icons/rx";
+import { useNavigate, useParams } from "react-router-dom";
 import ProtectedContent from "../../Account/ProtectedContent";
 
 export default function AssignmentControls() {
+  const navigate = useNavigate();
+  const { cid } = useParams(); // Extract course ID from URL parameters
+
+  // Function to handle navigation to the editor page with the correct course ID
+  const goToEditor = () => {
+    navigate(`/Kanbas/Courses/${cid}/Assignments/Editor`); // Use cid directly
+  };  
+
   return (
     <div id="wd-assignment-controls" className="d-flex justify-content-between align-items-center">
       {/* Search Box */}
@@ -30,7 +39,7 @@ export default function AssignmentControls() {
       {/* Buttons */}
       <ProtectedContent>
       <div className="d-flex">
-        <button id="wd-add-assignment-btn" className="btn btn-lg btn-danger me-1">
+        <button onClick={goToEditor} id="wd-add-assignment-btn" className="btn btn-lg btn-danger me-1">
           <FaPlus className="position-relative me-2" style={{ bottom: "2px" }} />
           Assignment
         </button>

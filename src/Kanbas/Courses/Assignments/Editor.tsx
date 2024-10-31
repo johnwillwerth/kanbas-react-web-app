@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import * as db from "../../Database";
+import { addAssignment, deleteAssignment, updateAssignment, editAssignment } from './reducer';
 
 export default function AssignmentEditor() {
   const { cid } = useParams(); // Get the course ID from the route parameters
   const { assignments } = db;
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // Find the relevant assignment based on the course ID (cid)
   const assignment = assignments.find((a) => a.course === cid);
@@ -24,13 +27,27 @@ export default function AssignmentEditor() {
   const availDate = new Date(assignment.availDate).toISOString().split('T')[0];
   const dueDate = new Date(assignment.dueDate).toISOString().split('T')[0];
 
+  // Save updates to Redux
+  const handleSave = () => {
+    if (assignments) {
+      dispatch(
+        updateAssignment({
+          _id: assignment._id,
+          title: assignment.title,  // Use the state to get updated title
+          course: assignment.course, // Retain course info
+        })
+      );
+      navigate(`/Kanbas/Courses/${cid}/Assignments`); // Navigate after saving
+    }
+  };
+
   return (
     <div id="wd-assignments-editor" className="container mt-4">
       <h2>Edit Assignment</h2>
       <div className="row">
         <div className="col-12">
           <label htmlFor="wd-name" className="form-label">Assignment Name</label>
-          <input id="wd-name" className="form-control mb-3" defaultValue={assignment._id} />
+          <input id="wd-name" className="form-control mb-3" defaultValue={`${assignment._id} - ${assignment.title}`} />
         </div>
       </div>
 
@@ -194,7 +211,7 @@ export default function AssignmentEditor() {
             <button 
                 id="Save" 
                 className="btn btn-danger" 
-                onClick={() => navigate(`/Kanbas/Courses/${cid}/Assignments`)}>
+                onClick={handleSave}>
                 Save
             </button>
         </div></div>

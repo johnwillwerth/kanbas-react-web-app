@@ -4,13 +4,13 @@ import Home from "./Home";
 import Assignments from "./Assignments";
 import AssignmentEditor from "./Assignments/Editor";
 import PeopleTable from "./People/Table";
-import { assignments } from "../Database";
 import { Navigate, Route, Routes, useParams, useLocation } from "react-router";
 import { FaAlignJustify } from "react-icons/fa";
+
 export default function Courses({ courses }: { courses: any[]; }) {
     const { aid, cid } = useParams();
     const course = courses.find((course) => course._id === cid);
-    const assignment = assignments.find((assignment) => assignment._id === aid);
+    
     return (
         <div id="wd-courses">
             <h2 className="text-danger">
@@ -26,7 +26,7 @@ export default function Courses({ courses }: { courses: any[]; }) {
                     <Route path="Home" element={<Home />} />
                     <Route path="Modules" element={<Modules />} />
                     <Route path="Assignments" element={<Assignments />} />
-                    <Route path="Assignments/:aid" element={<AssignmentEditor />} />
+                    <Route path="Assignments/:aid/Editor" element={<AssignmentEditor />} />
                     <Route path="People" element={<PeopleTable />} />
                 </Routes>
                 </div>

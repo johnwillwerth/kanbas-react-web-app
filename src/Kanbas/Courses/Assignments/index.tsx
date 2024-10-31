@@ -3,12 +3,13 @@ import { IoEllipsisVertical } from "react-icons/io5";
 import { PiNotePencilDuotone } from "react-icons/pi";
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import { useState } from 'react';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import AssignmentControls from "./AssignmentControls";
 import AssignmentControlButtons from "./AssignmentControlButtons";
 import ProtectedContent from "../../Account/ProtectedContent";
 import * as db from "../../Database";
 import { Link, useParams } from "react-router-dom";
+import { deleteAssignment } from "./reducer";
 
 export default function Assignments() {
   const [isOpen, setIsOpen] = useState(true); // State to manage the collapse/expand status
@@ -19,6 +20,7 @@ export default function Assignments() {
 
   const { cid } = useParams();
   const { assignments } = db;
+  const dispatch = useDispatch();
 
   const { currentUser } = useSelector((state: any) => state.accountReducer);
 
@@ -61,14 +63,14 @@ export default function Assignments() {
                           {/* Ensures assignment ID only links to editor page for faculty, otherwise displaying plaintext */}
                           {currentUser?.role === "FACULTY" ? (
                             <ProtectedContent>
-                              <Link to={`/Kanbas/Courses/${assignment.course}/Assignments/Editor`} id="wd-course-assignment-editor-link"
+                              <Link to={`/Kanbas/Courses/${assignment.course}/Assignments/${assignment._id}/Editor`} id="wd-course-assignment-editor-link"
                                 className="list-group-item border border-0" style={{ padding: '0', marginBottom: '0.5rem' }}>
-                                <span style={{ fontWeight: 'bold', fontSize: '24px' }}>{assignment._id}</span>
+                                <span style={{ fontWeight: 'bold', fontSize: '24px' }}>{`${assignment._id} - ${assignment.title}`}</span>
                               </Link>
                             </ProtectedContent>
                           ) : (
                             <span id="wd-course-assignment-id" className="list-group-item border border-0" 
-                              style={{ padding: '0', marginBottom: '0.5rem', fontWeight: 'bold', fontSize: '24px' }}> {assignment._id}
+                              style={{ padding: '0', marginBottom: '0.5rem', fontWeight: 'bold', fontSize: '24px' }}> {`${assignment._id} - ${assignment.title}`}
                             </span>
                           )}
 
@@ -81,7 +83,10 @@ export default function Assignments() {
                           </div>
                         </span>
                       </div>
-                      <AssignmentControlButtons />
+                      <AssignmentControlButtons assignmentId={assignment._id}
+                        deleteAssignment={(assignmentId) => {
+                          dispatch(deleteAssignment(assignmentId));
+                        }} />
                     </li>
                   ))
                 ) : (
