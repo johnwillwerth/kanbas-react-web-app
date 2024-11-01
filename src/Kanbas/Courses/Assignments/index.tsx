@@ -1,19 +1,18 @@
+import AssignmentControls from "./AssignmentControls";
+import AssignmentControlButtons from "./AssignmentControlButtons";
+import ProtectedContent from "../../Account/ProtectedContent";
+import * as db from "../../Database";
 import { BsGripVertical, BsPlus } from "react-icons/bs";
 import { IoEllipsisVertical } from "react-icons/io5";
 import { PiNotePencilDuotone } from "react-icons/pi";
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import { useState } from 'react';
-import { useSelector, useDispatch } from "react-redux";
-import AssignmentControls from "./AssignmentControls";
-import AssignmentControlButtons from "./AssignmentControlButtons";
-import ProtectedContent from "../../Account/ProtectedContent";
-import * as db from "../../Database";
 import { Link, useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { deleteAssignment } from "./reducer";
 
 export default function Assignments() {
   const [isOpen, setIsOpen] = useState(true); // State to manage the collapse/expand status
-
   const toggleList = () => {
     setIsOpen(!isOpen); // Toggle the isOpen state
   };

@@ -1,15 +1,17 @@
 import { FaPlus } from "react-icons/fa6";
 import { RxMagnifyingGlass } from "react-icons/rx";
 import { useNavigate, useParams } from "react-router-dom";
+import { assignments } from "../../Database";
 import ProtectedContent from "../../Account/ProtectedContent";
 
 export default function AssignmentControls() {
   const navigate = useNavigate();
-  const { cid } = useParams(); // Extract course ID from URL parameters
+  const { cid, aid } = useParams(); // Extract course ID from URL parameters
+  const assignment = assignments.find((assignment) => assignment._id === aid);
 
   // Function to handle navigation to the editor page with the correct course ID
   const goToEditor = () => {
-    navigate(`/Kanbas/Courses/${cid}/Assignments/Editor`); // Use cid directly
+    navigate(`/Kanbas/Courses/${cid}/Assignments/${aid}/Editor`); // Use cid directly
   };  
 
   return (
