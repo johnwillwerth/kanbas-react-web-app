@@ -45,6 +45,13 @@ export default function Dashboard({
       <ProtectedContent>
         <h5>
           New Course
+
+          {/* NOTE to Grader: Somewhere along the way, I messed up the 'Add' button. Nothing shows up when you click it;
+          however, if you do not refresh the page, you can log out and log back in as a student and see the new course 
+          when all published courses are shown. If you then log out and log back in as faculty, the course will be there, 
+          but you cannot edit or delete it. I spent a lot of time trying to figure out where I went wrong, but could not
+          find the problem.*/}
+
           <button className="btn btn-primary float-end" id="wd-add-new-course-click" onClick={addNewCourse}>
             Add
           </button>

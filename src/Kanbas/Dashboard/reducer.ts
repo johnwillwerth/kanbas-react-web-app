@@ -1,18 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { courses, enrollments } from "../Database";
 
+const startEnrolled = (courses: any[], enrollments: any[]) => {
+  return courses.filter((course) =>
+      enrollments.some(enrollment => enrollment.course === course._id)
+  ).map(course => course._id); // Get the IDs of the enrolled courses
+};
+
 interface DashboardState {
-  enrolledCourses: string[];  // Array of course IDs the user is enrolled in
-  allCourses: any[];          // Array for all courses (define the type as needed)
-  showCourses: boolean;       // Determines if courses should be displayed
-  showAllCourses: boolean;    // Determines if all courses or only enrolled courses should be shown
+    enrolledCourses: string[];  // Array of course IDs the user is enrolled in
+    showCourses: boolean;       // Determines if courses should be displayed
+    showAllCourses: boolean;    // Determines if all courses or only enrolled courses should be shown
 }
 
 const initialState: DashboardState = {
-  enrolledCourses: [], 
-  allCourses: [], 
-  showCourses: true,          // Start hidden by default
-  showAllCourses: false,       // Start by showing only enrolled courses
+    enrolledCourses: startEnrolled(courses, enrollments), 
+    showCourses: true,          
+    showAllCourses: false,       // Start by showing only enrolled courses
 };
 
 const dashboardSlice = createSlice({
