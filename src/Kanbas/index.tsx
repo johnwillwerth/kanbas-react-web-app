@@ -8,7 +8,6 @@ import Inbox from "./Inbox";
 import "../styles.css";
 import * as db from "./Database";
 import ProtectedRoute from "./Account/ProtectedRoute";
-import ProtectedContent from "./Account/ProtectedContent";
 import { useState } from "react";
 import store from "./store";
 import { Provider } from "react-redux";
@@ -36,6 +35,7 @@ export default function Kanbas() {
       })
     );
   };
+
     return (
       <Provider store={store}>
         <div id="wd-kanbas">

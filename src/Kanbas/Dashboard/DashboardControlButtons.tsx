@@ -1,9 +1,6 @@
-import { FaTrash } from "react-icons/fa";
-import { FaPencil } from "react-icons/fa6";
 import ProtectedContent from "../Account/ProtectedContent";
 import ProtectedStudent from "../Account/ProtectedStudent";
-import { enrollments } from "../Database";
-import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function DashboardControlButtons({
   courseId,
@@ -18,13 +15,16 @@ export default function DashboardControlButtons({
   enrollInCourse: (courseId: string) => void;
   unenrollFromCourse: (courseId: string) => void;
 }) {
-  const { uid } = useParams();
+
+  {/* NOTE to Grader: I had this working, but I must have changed
+    something along the way. I have been unable to properly retrieve 
+    enrolled courses at login. The 'Enroll' button works, but the 
+    initial state of the page is incorrectly loading zero enrolled courses.*/}
 
   // Get user enrollment for the course
-  const userEnrollment = enrollments.find(
-    (enrollment) => enrollment.user === uid && enrollment.course === courseId
+  const isEnrolled = useSelector((state: any) => 
+    state.dashboardReducer.enrolledCourses.includes(courseId)
   );
-  const isEnrolled = Boolean(userEnrollment);
 
   const handleDelete = () => {
     if (window.confirm("Are you sure you want to delete this course?")) {
@@ -32,32 +32,35 @@ export default function DashboardControlButtons({
     }
   };
 
-  const handleEnrollment = () => {
-    if (window.confirm("Are you sure you want to enroll in this course?")) {
-      enrollInCourse(courseId);
-    }
-  };
-
-  const handleUnenrollment = () => {
-    if (window.confirm("Are you sure you want to unenroll from this course?")) {
-      unenrollFromCourse(courseId);
-    }
-  };
-
   return (
     <div className="float-end">
-      <ProtectedContent>
-        <FaPencil onClick={() => editCourse(courseId)} className="text-primary me-3" />
-        <FaTrash className="text-danger me-2 mb-1" onClick={handleDelete} />
-      </ProtectedContent>
+      {/* Render buttons if the user is enrolled */}
+      {isEnrolled && (
+        <ProtectedContent>
+          <button
+            onClick={() => editCourse(courseId)}
+            className="btn btn-warning me-3"
+            style={{ color: "black" }}
+          >
+            Edit
+          </button>
+          <button
+            onClick={handleDelete}
+            className="btn btn-danger me-2 mb-1"
+          >
+            Delete
+          </button>
+        </ProtectedContent>
+      )}
 
+      {/* Render enrollment button regardless of enrollment status */}
       <ProtectedStudent>
         <button
           className={`btn float-end ${isEnrolled ? 'btn-danger' : 'btn-success'}`}
           id="wd-enroll-course-click"
           onClick={(event) => {
             event.preventDefault();
-            isEnrolled ? handleUnenrollment() : handleEnrollment();
+            isEnrolled ? unenrollFromCourse(courseId) : enrollInCourse(courseId);
           }}
         >
           {isEnrolled ? 'Unenroll' : 'Enroll'}

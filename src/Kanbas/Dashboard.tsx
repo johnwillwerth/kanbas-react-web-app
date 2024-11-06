@@ -1,11 +1,9 @@
-import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import * as db from "./Database";
 import DashboardControlButtons from "./Dashboard/DashboardControlButtons";
 import ProtectedContent from "./Account/ProtectedContent";
 import ProtectedStudent from "./Account/ProtectedStudent";
-import { enrollInCourse, unenrollFromCourse, toggleCourseDisplay, resetCourseView } from "./Dashboard/reducer";
+import { enrollInCourse, unenrollFromCourse, toggleCourseDisplay } from "./Dashboard/reducer";
 
 export default function Dashboard({
   courses,
@@ -25,19 +23,19 @@ export default function Dashboard({
   const dispatch = useDispatch();
 
   // Get user, enrolled courses, and display settings from Redux state
-  const { currentUser } = useSelector((state: any) => state.accountReducer);
   const { enrolledCourses, showCourses, showAllCourses } = useSelector((state: any) => state.dashboardReducer);
-  const { enrollments } = db;
 
-  // Filter courses based on the toggle state
+  // Filter courses based on Redux state enrolledCourses
   const filteredCourses = showAllCourses
     ? courses
-    : courses.filter((course) =>
-        enrollments.some(
-          (enrollment) =>
-            enrollment.user === currentUser._id && enrollment.course === course._id
-        )
-      );
+    : courses.filter((course) => enrolledCourses.includes(course._id));
+
+  const handleEditCourse = (courseId: string) => {
+    const selectedCourse = courses.find((c) => c._id === courseId);
+    if (selectedCourse) {
+      setCourse(selectedCourse); // Populate input fields with selected course data
+    }
+  };
 
   return (
     <div className="p-4" id="wd-dashboard">
@@ -75,11 +73,7 @@ export default function Dashboard({
           className="btn float-end btn-primary"
           id="wd-show-enrollments"
         >
-          {showCourses
-            ? showAllCourses
-              ? "Show Enrolled Courses"
-              : "Show All Published Courses"
-            : "Show All Published Courses"}
+          {showCourses ? (showAllCourses ? "Show Enrolled Courses" : "Show All Published Courses") : "Show All Published Courses"}
         </button>
       </ProtectedStudent>
 
@@ -93,29 +87,46 @@ export default function Dashboard({
               {filteredCourses.map((course) => (
                 <div key={course._id} className="wd-dashboard-course col" style={{ width: "300px" }}>
                   <div className="card rounded-3 overflow-hidden">
-                    <Link
-                      to={`/Kanbas/Courses/${course._id}/Home`}
-                      className="wd-dashboard-course-link text-decoration-none text-dark"
-                    >
-                      <img src="/images/reactjs.jpg" width="100%" height={160} alt="Course" />
-                      <div className="card-body">
-                        <h5 className="wd-dashboard-course-title card-title">{course.name}</h5>
-                        <p
-                          className="wd-dashboard-course-title card-text overflow-y-hidden"
-                          style={{ maxHeight: 100 }}
-                        >
-                          {course.description}
-                        </p>
-                      </div>
-                    </Link>
-                    <div className="d-flex justify-content-between align-items-center p-2">
-                      <Link to={`/Kanbas/Courses/${course._id}/Home`} className="btn btn-primary">
-                        Go
+                    {enrolledCourses.includes(course._id) ? (
+                      <Link
+                        to={`/Kanbas/Courses/${course._id}/Home`}
+                        className="wd-dashboard-course-link text-decoration-none text-dark"
+                      >
+                        <img src="/images/reactjs.jpg" width="100%" height={160} alt="Course" />
                       </Link>
+                    ) : (
+                      <div>
+                        <img src="/images/reactjs.jpg" width="100%" height={160} alt="Course" />
+                      </div>
+                    )}
+                    <div className="card-body">
+                      {enrolledCourses.includes(course._id) ? (
+                        <Link
+                          to={`/Kanbas/Courses/${course._id}/Home`}
+                          className="wd-dashboard-course-link text-decoration-none text-dark"
+                        >
+                          <h5 className="wd-dashboard-course-title card-title">{course.name}</h5>
+                        </Link>
+                      ) : (
+                        <h5 className="wd-dashboard-course-title card-title">{course.name}</h5>
+                      )}
+                      <p className="wd-dashboard-course-title card-text overflow-y-hidden" style={{ maxHeight: 100 }}>
+                        {course.description}
+                      </p>
+                    </div>
+                    <div className="d-flex justify-content-between align-items-center p-2">
+                      {/* Only show "Go" button if enrolled */}
+                      {enrolledCourses.includes(course._id) ? (
+                        <Link to={`/Kanbas/Courses/${course._id}/Home`} className="btn btn-primary">
+                          Go
+                        </Link>
+                      ) : (
+                        <span className="text-muted">Enroll to view</span> // Message for not enrolled users
+                      )}
                       <DashboardControlButtons
                         courseId={course._id}
                         deleteCourse={deleteCourse}
-                        editCourse={setCourse}
+                        editCourse={handleEditCourse}
                         enrollInCourse={(id) => dispatch(enrollInCourse(id))}
                         unenrollFromCourse={(id) => dispatch(unenrollFromCourse(id))}
                       />
@@ -126,7 +137,7 @@ export default function Dashboard({
             </div>
           </div>
         </div>
-      )} 
+      )}
     </div>
   );
 }

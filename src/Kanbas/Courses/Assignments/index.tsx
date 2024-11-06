@@ -1,6 +1,5 @@
 import AssignmentControls from "./AssignmentControls";
 import AssignmentControlButtons from "./AssignmentControlButtons";
-import ProtectedContent from "../../Account/ProtectedContent";
 import * as db from "../../Database";
 import { BsGripVertical, BsPlus } from "react-icons/bs";
 import { IoEllipsisVertical } from "react-icons/io5";
@@ -10,6 +9,7 @@ import { useState } from 'react';
 import { Link, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteAssignment } from "./reducer";
+import ProtectedContent from "../../Account/ProtectedContent";
 
 export default function Assignments() {
   const [isOpen, setIsOpen] = useState(true); // State to manage the collapse/expand status
@@ -59,19 +59,10 @@ export default function Assignments() {
                         </button>
                         <span>
 
-                          {/* Ensures assignment ID only links to editor page for faculty, otherwise displaying plaintext */}
-                          {currentUser?.role === "FACULTY" ? (
-                            <ProtectedContent>
-                              <Link to={`/Kanbas/Courses/${assignment.course}/Assignments/${assignment._id}/Editor`} id="wd-course-assignment-editor-link"
-                                className="list-group-item border border-0" style={{ padding: '0', marginBottom: '0.5rem' }}>
-                                <span style={{ fontWeight: 'bold', fontSize: '24px' }}>{`${assignment._id} - ${assignment.title}`}</span>
-                              </Link>
-                            </ProtectedContent>
-                          ) : (
-                            <span id="wd-course-assignment-id" className="list-group-item border border-0" 
-                              style={{ padding: '0', marginBottom: '0.5rem', fontWeight: 'bold', fontSize: '24px' }}> {`${assignment._id} - ${assignment.title}`}
-                            </span>
-                          )}
+                          <Link to={`/Kanbas/Courses/${assignment.course}/Assignments/${assignment._id}/Editor`} id="wd-course-assignment-editor-link"
+                            className="list-group-item border border-0" style={{ padding: '0', marginBottom: '0.5rem' }}>
+                            <span style={{ fontWeight: 'bold', fontSize: '24px' }}>{`${assignment._id} - ${assignment.title}`}</span>
+                          </Link>
 
                           <div style={{ marginTop: '0.5rem' }}>
                             <span style={{ fontWeight: 'bold', color: 'red' }}>Multiple Modules</span> |
@@ -89,9 +80,13 @@ export default function Assignments() {
                     </li>
                   ))
                 ) : (
-                  <li className="list-group-item p-3">
-                    <span>No assignments found for this course.</span>
-                  </li>
+                  <ProtectedContent>
+                    <li className="list-group-item p-3">
+                      <Link to={`/Kanbas/Courses/${cid}/Assignments/New/Editor`} id="wd-course-assignment-editor-link"
+                        className="list-group-item border border-0" style={{ padding: '0', marginBottom: '0.5rem' }}>
+                      </Link>
+                    </li>
+                  </ProtectedContent>
                 )}
               </ul>
             )}

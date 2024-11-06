@@ -11,8 +11,8 @@ export default function AssignmentControls() {
 
   // Function to handle navigation to the editor page with the correct course ID
   const goToEditor = () => {
-    navigate(`/Kanbas/Courses/${cid}/Assignments/${aid}/Editor`); // Use cid directly
-  };  
+    navigate(`/Kanbas/Courses/${cid}/Assignments/New/Editor`);
+  }; 
 
   return (
     <div id="wd-assignment-controls" className="d-flex justify-content-between align-items-center">

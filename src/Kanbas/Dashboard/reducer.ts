@@ -1,15 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { courses, enrollments } from "../Database";
 
 interface DashboardState {
-    enrolledCourses: string[];  // Array of course IDs the user is enrolled in
-    showCourses: boolean;       // Determines if courses should be displayed
-    showAllCourses: boolean;    // Determines if all courses or only enrolled courses should be shown
+  enrolledCourses: string[];  // Array of course IDs the user is enrolled in
+  allCourses: any[];          // Array for all courses (define the type as needed)
+  showCourses: boolean;       // Determines if courses should be displayed
+  showAllCourses: boolean;    // Determines if all courses or only enrolled courses should be shown
 }
 
 const initialState: DashboardState = {
-    enrolledCourses: [], 
-    showCourses: false,          // Start hidden by default
-    showAllCourses: false,       // Start by showing only enrolled courses
+  enrolledCourses: [], 
+  allCourses: [], 
+  showCourses: true,          // Start hidden by default
+  showAllCourses: false,       // Start by showing only enrolled courses
 };
 
 const dashboardSlice = createSlice({
@@ -33,7 +36,6 @@ const dashboardSlice = createSlice({
             // Only change `showCourses` to true on the first click
             if (!state.showCourses) {
                 state.showCourses = true;
-                state.showAllCourses = !state.showAllCourses;
             } else {
                 state.showAllCourses = !state.showAllCourses; // Toggle between all and enrolled courses
             }
