@@ -1,4 +1,4 @@
-[
+export default [
   { "_id": "A101", "title": "Propulsion Assignment",               "course": "RS101", "group": "ASSIGNMENTS", "description": "Assignment on propulsion.",                                                                      "points": 100, "availDate": "2024-05-13", "dueDate": "2024-05-20" },
   { "_id": "A102", "title": "Combustion Analysis",                 "course": "RS101", "group": "ASSIGNMENTS", "description": "Analysis of combustion.",                                                                        "points": 100, "availDate": "2024-05-20", "dueDate": "2024-05-27" },
   { "_id": "A103", "title": "Nozzle Design Project",               "course": "RS101", "group": "PROJECT",     "description": "Project on nozzle design.",                                                                      "points": 100, "availDate": "2024-05-27", "dueDate": "2024-06-03" },
@@ -20,4 +20,4 @@
   { "_id": "A701", "title": "Democratic Education Assignment",     "course": "RS107", "group": "ASSIGNMENTS", "description": "Assignment on democratic education.",                                                            "points": 100, "availDate": "2024-05-13", "dueDate": "2024-05-20" },
   { "_id": "A702", "title": "Civil Rights Quiz",                   "course": "RS107", "group": "QUIZZES",     "description": "Quiz on civil rights.",                                                                          "points": 100, "availDate": "2024-05-20", "dueDate": "2024-05-27" },
   { "_id": "A703", "title": "Democratic Education Team Project",   "course": "RS107", "group": "PROJECT",     "description": "Team project, consisting of 2-4 students, analyzing a specific aspect of democratic education.", "points": 100, "availDate": "2024-05-27", "dueDate": "2024-06-03" }
-]
+];

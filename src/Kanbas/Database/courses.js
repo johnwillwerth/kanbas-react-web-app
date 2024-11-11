@@ -1,4 +1,4 @@
-[
+export default [
   {
     "_id": "RS101",
     "name": "Rocket Propulsion",
@@ -72,4 +72,4 @@
     "credits": 3,
     "description": "This course examines the foundations of democratic education, emphasizing the role of education in fostering civic responsibility, critical thinking, and social equality. It explores historical and contemporary models of democratic schooling, the importance of participatory learning, and the development of educational systems that reflect democratic values. Students will engage in discussions on the challenges and opportunities of implementing democratic principles in diverse educational settings."
   }
-]
+];

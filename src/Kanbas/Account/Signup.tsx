@@ -1,23 +1,49 @@
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import * as client from "./client";
+import { useDispatch } from "react-redux";
+import { setCurrentUser } from "./reducer";
+
 export default function Signup() {
+  const [user, setUser] = useState<any>({});
+  const [signupError, setSignupError] = useState<string | null>(null); // State for error message
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const signup = async () => {
+    try {
+      const currentUser = await client.signup(user);
+      dispatch(setCurrentUser(currentUser));
+      navigate("/Kanbas/Account/Profile");
+    } catch (error: any) {
+      // Check if there's an error response with a message
+      if (error.response && error.response.status === 400) {
+        setSignupError(error.response.data.message || "An error occurred during signup.");
+      } else {
+        setSignupError("An unexpected error occurred.");
+      }
+    }
+  };
+
   return (
     <div id="wd-signup-screen">
-      <h3>Signup</h3>
-      <input id="wd-username"
-             placeholder="username"
-             className="form-control mb-2"/>
-      <input id="wd-password"
-             placeholder="password" type="password"
-             className="form-control mb-2"/>
-      <input id="wd-verify-password"
-             placeholder="verify password" type="password"
-             className="form-control mb-2"/>
-      <Link  id="wd-signup-btn"
-             to="/Kanbas/Account/Profile"
-             className="btn btn-primary w-100">
-             Signup </Link>
-      <Link  id="wd-signin-link"
-             to="/Kanbas/Account/Signin">
-             Signin</Link>
+      <h1>Signup</h1>
+      {signupError && <div className="alert alert-danger">{signupError}</div>} {/* Display error message */}
+      <input
+        value={user.username}
+        onChange={(e) => setUser({ ...user, username: e.target.value })}
+        className="wd-username form-control mb-2"
+        placeholder="username"
+      />
+      <input
+        value={user.password}
+        onChange={(e) => setUser({ ...user, password: e.target.value })}
+        type="password"
+        className="wd-password form-control mb-2"
+        placeholder="password"
+      />
+      <button onClick={signup} className="wd-signup-btn btn btn-primary mb-2 w-100"> Sign up </button><br />
+      <Link to="/Kanbas/Account/Signin" className="wd-signin-link">Sign in</Link>
     </div>
-);}
+  );
+}
