@@ -21,6 +21,7 @@ export default function Dashboard({
   updateCourse: () => void;
 }) {
   const dispatch = useDispatch();
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
 
   // Get user, enrolled courses, and display settings from Redux state
   const { enrolledCourses, showCourses, showAllCourses } = useSelector((state: any) => state.dashboardReducer);
