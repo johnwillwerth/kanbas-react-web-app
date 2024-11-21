@@ -25,7 +25,7 @@ export default function WorkingWithObjects() {                           // crea
         Update Title
       </a>                                                               {/* form element to edit local state variable */}
       <input className="form-control w-75" id="wd-assignment-title"      // used to encode in URL that updates  
-        defaultValue={assignment.title} onChange={(e) =>                 // property in remote object     
+        value={assignment.title} onChange={(e) =>                 // property in remote object     
           setAssignment({ ...assignment, title: e.target.value })}/><br />  
                    
       <a id="wd-update-assignment-score"                 
@@ -34,7 +34,7 @@ export default function WorkingWithObjects() {                           // crea
         Update Score
       </a>                                                          
       <input type="number" className="form-control w-75" id="wd-assignment-score"   
-        defaultValue={assignment.score} onChange={(e) =>                 
+        value={assignment.score} onChange={(e) =>                 
           setAssignment({ ...assignment, score: e.target.valueAsNumber })}/><br />
 
       <a id="wd-update-assignment-completed"                 
@@ -66,7 +66,7 @@ export default function WorkingWithObjects() {                           // crea
         Update Name
       </a>                                                          
       <input className="form-control w-75" id="wd-module-name"   
-        defaultValue={module.name} onChange={(e) =>                 
+        value={module.name} onChange={(e) =>                 
           setModule({ ...module, name: e.target.value })}/><br />
 
       <a id="wd-update-module-description"                 
@@ -75,7 +75,7 @@ export default function WorkingWithObjects() {                           // crea
         Update Description
       </a>                                                          
       <input className="form-control w-75" id="wd-module-description"   
-        defaultValue={module.description} onChange={(e) =>                 
+        value={module.description} onChange={(e) =>                 
           setModule({ ...module, description: e.target.value })}/>
 
       <hr />

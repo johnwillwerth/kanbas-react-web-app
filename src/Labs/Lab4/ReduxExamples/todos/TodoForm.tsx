@@ -11,7 +11,7 @@ export default function TodoForm() {
               id="wd-add-todo-click"> Add </button>
         <button onClick={() => dispatch(updateTodo(todo))}
               id="wd-update-todo-click"> Update </button>
-        <input defaultValue={todo.title}
+        <input value={todo.title}
          onChange={ (e) => dispatch(setTodo({ ...todo, title: e.target.value })) }/>
       </li>
 );}

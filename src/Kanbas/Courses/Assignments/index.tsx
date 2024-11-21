@@ -1,30 +1,43 @@
 import AssignmentControls from "./AssignmentControls";
 import AssignmentControlButtons from "./AssignmentControlButtons";
-import * as db from "../../Database";
+import ProtectedContent from "../../Account/ProtectedContent";
+import * as coursesClient from "../client";
+import * as assignmentsClient from "./client";
+import { setAssignments, addAssignment, deleteAssignment, updateAssignment, editAssignment } from "./reducer";
+
 import { BsGripVertical, BsPlus } from "react-icons/bs";
 import { IoEllipsisVertical } from "react-icons/io5";
 import { PiNotePencilDuotone } from "react-icons/pi";
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteAssignment } from "./reducer";
-import ProtectedContent from "../../Account/ProtectedContent";
 
 export default function Assignments() {
-  const [isOpen, setIsOpen] = useState(true); // State to manage the collapse/expand status
+
+  // Toggle assignment list open/closed
+  const [isOpen, setIsOpen] = useState(true);
   const toggleList = () => {
-    setIsOpen(!isOpen); // Toggle the isOpen state
+    setIsOpen(!isOpen);
   };
 
   const { cid } = useParams();
-  const { assignments } = db;
+  const { assignments } = useSelector((state: any) => state.assignmentReducer);
   const dispatch = useDispatch();
 
-  const { currentUser } = useSelector((state: any) => state.accountReducer);
+  const removeAssignment = async (assignmentId: string) => {
+    await assignmentsClient.deleteAssignment(assignmentId);
+    dispatch(deleteAssignment(assignmentId));
+  };
 
-  // Filter assignments based on the course ID from the URL params
-  const courseAssignments = assignments.filter((assignment) => assignment.course === cid);
+  // Fetch course assignments from server
+  const fetchAssignments = async () => {
+    const assignments = await coursesClient.findAssignmentsForCourse(cid as string);
+    dispatch(setAssignments(assignments));
+  };
+  useEffect(() => {
+    fetchAssignments();
+  }, []);
 
   return (
     <div id="wd-assignments">
@@ -49,8 +62,8 @@ export default function Assignments() {
             {/* Only render this part when isOpen is true */}
             {isOpen && (
               <ul className="wd-assignment list-group rounded-0">
-                {courseAssignments.length > 0 ? (
-                  courseAssignments.map((assignment) => (
+                {assignments.length > 0 ? (
+                  assignments.map((assignment: any) => (
                     <li key={assignment._id} className="wd-lesson list-group-item p-3 ps-1 border-gray">
                       <div className="d-flex align-items-center">
                         <BsGripVertical className="me-2 fs-3" />
@@ -74,9 +87,7 @@ export default function Assignments() {
                         </span>
                       </div>
                       <AssignmentControlButtons assignmentId={assignment._id}
-                        deleteAssignment={(assignmentId) => {
-                          dispatch(deleteAssignment(assignmentId));
-                        }} />
+                        deleteAssignment={(assignmentId) => removeAssignment(assignmentId)} />
                     </li>
                   ))
                 ) : (

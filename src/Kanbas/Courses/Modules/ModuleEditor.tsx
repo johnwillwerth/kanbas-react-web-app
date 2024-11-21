@@ -12,7 +12,7 @@ export default function ModuleEditor({ dialogTitle, moduleName, setModuleName, a
                         <button type="button" className="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div className="modal-body">
-                        <input className="form-control" defaultValue={moduleName} placeholder="Module Name"
+                        <input className="form-control" value={moduleName} placeholder="Module Name"
                             onChange={(e) => setModuleName(e.target.value)}/>
                     </div>
                     <div className="modal-footer">

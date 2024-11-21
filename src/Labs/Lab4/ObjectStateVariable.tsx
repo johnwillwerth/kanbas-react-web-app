@@ -6,11 +6,11 @@ export default function ObjectStateVariable() {
       <h2>Object State Variables</h2>
       <pre>{JSON.stringify(person, null, 2)}</pre>
       <input
-        defaultValue={person.name}
+        value={person.name}
         onChange={(e) => setPerson({ ...person, name: e.target.value })}
       />
       <input
-        defaultValue={person.age}
+        value={person.age}
         onChange={(e) => setPerson({ ...person,
                                      age: parseInt(e.target.value) })}
       />

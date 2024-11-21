@@ -17,11 +17,11 @@ export default function WorkingWithObjectsAsynchronously() {
     <div id="wd-asynchronous-objects">
       <h3>Working with Objects Asynchronously</h3>
       <h4>Assignment</h4>
-      <input defaultValue={assignment.title} className="form-control mb-2"
+      <input value={assignment.title} className="form-control mb-2"
         onChange={(e) => setAssignment({ ...assignment, title: e.target.value }) } />
-      <textarea defaultValue={assignment.description} className="form-control mb-2"
+      <textarea value={assignment.description} className="form-control mb-2"
         onChange={(e) => setAssignment({ ...assignment, description: e.target.value }) }/>
-      <input type="date" className="form-control mb-2" defaultValue={assignment.due}
+      <input type="date" className="form-control mb-2" value={assignment.due}
         onChange={(e) => setAssignment({ ...assignment, due: e.target.value })} />
       <div className="form-check form-switch">
         <input className="form-check-input" type="checkbox" id="wd-completed"

@@ -75,7 +75,7 @@ export default function WorkingWithArraysAsynchronously() {
             ) : (
               <input
                 className="form-control w-50 float-start"
-                defaultValue={todo.title}
+                value={todo.title}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
                     updateTodo({ ...todo, editing: false });

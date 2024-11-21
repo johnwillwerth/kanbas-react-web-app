@@ -45,6 +45,7 @@ export default function ModulesControls(
           type="button" data-bs-toggle="dropdown">
           <GreenCheckmark />
           Collapse All</button>
+
         <ProtectedContent>
           <button id="wd-add-module-btn" className="btn btn-lg btn-danger"
             data-bs-toggle="modal" data-bs-target="#wd-add-module-dialog">
@@ -53,6 +54,7 @@ export default function ModulesControls(
           <ModuleEditor dialogTitle="Add Module" moduleName={moduleName}
             setModuleName={setModuleName} addModule={addModule} />
         </ProtectedContent>
+        
       </div>
     </div>
 );}

@@ -4,7 +4,7 @@ import LessonControlButtons from "./LessonControlButtons";
 import * as coursesClient from "../client";
 import * as modulesClient from "./client";
 import { BsGripVertical } from "react-icons/bs";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { setModules, addModule, editModule, updateModule, deleteModule } from "./reducer";
@@ -12,7 +12,7 @@ import { setModules, addModule, editModule, updateModule, deleteModule } from ".
 export default function Modules() {
   const { cid } = useParams();
   const [moduleName, setModuleName] = useState("");
-  const { modules } = useSelector((state: any) => state.modulesReducer);
+  const { modules } = useSelector((state: any) => state.moduleReducer);
   const dispatch = useDispatch();
 
   const saveModule = async (module: any) => {
@@ -28,7 +28,7 @@ export default function Modules() {
   const createModuleForCourse = async () => {
     if (!cid) return;
     const newModule = { name: moduleName, course: cid };
-    const module = await coursesClient.createModuleForCourse(cid, newModule);
+    const module = await coursesClient.createModule(cid, newModule);
     dispatch(addModule(module));
   };
 

@@ -1,63 +1,68 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { courses, enrollments } from "../Database";
-
-const startEnrolled = (courses: any[], enrollments: any[]) => {
-  return courses.filter((course) =>
-      enrollments.some(enrollment => enrollment.course === course._id)
-  ).map(course => course._id); // Get the IDs of the enrolled courses
-};
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface DashboardState {
-    enrolledCourses: string[];  // Array of course IDs the user is enrolled in
-    showCourses: boolean;       // Determines if courses should be displayed
-    showAllCourses: boolean;    // Determines if all courses or only enrolled courses should be shown
+  courses: any[]; // Replace `any` with a specific course type if you have one
+  enrolledCourses: string[]; // Array of course IDs
+  showCourses: boolean;
+  showAllCourses: boolean;
 }
 
 const initialState: DashboardState = {
-    enrolledCourses: startEnrolled(courses, enrollments), 
-    showCourses: true,          
-    showAllCourses: false,       // Start by showing only enrolled courses
+  courses: [],
+  enrolledCourses: [],
+  showCourses: false,
+  showAllCourses: false,
 };
 
 const dashboardSlice = createSlice({
-    name: "dashboard",
-    initialState,
-    reducers: {
-        // Enroll in a course
-        enrollInCourse: (state, { payload }: { payload: string }) => {
-            if (!state.enrolledCourses.includes(payload)) {
-                state.enrolledCourses.push(payload);
-            }
-        },
-        
-        // Unenroll from a course
-        unenrollFromCourse: (state, { payload }: { payload: string }) => {
-            state.enrolledCourses = state.enrolledCourses.filter(courseId => courseId !== payload);
-        },
-        
-        // Toggle visibility of courses
-        toggleCourseDisplay: (state) => {
-            // Only change `showCourses` to true on the first click
-            if (!state.showCourses) {
-                state.showCourses = true;
-            } else {
-                state.showAllCourses = !state.showAllCourses; // Toggle between all and enrolled courses
-            }
-        },
-
-        // Reset course view to start fresh (optional)
-        resetCourseView: (state) => {
-            state.showCourses = false;
-            state.showAllCourses = false;
-        },
+  name: "dashboard",
+  initialState,
+  reducers: {
+    // Enroll in a course
+    enrollInCourse: (state, action: PayloadAction<string>) => {
+      if (!state.enrolledCourses.includes(action.payload)) {
+        state.enrolledCourses.push(action.payload);
+      }
     },
+
+    // Unenroll from a course
+    unenrollFromCourse: (state, action: PayloadAction<string>) => {
+      state.enrolledCourses = state.enrolledCourses.filter(
+        (id) => id !== action.payload
+      );
+    },
+
+    // Toggle to display courses or not
+    toggleCourseDisplay: (state) => {
+      state.showCourses = !state.showCourses;
+      if (!state.showCourses) state.showAllCourses = false; // Reset when hiding
+    },
+
+    // Toggle between all and enrolled courses
+    toggleShowAllCourses: (state) => {
+      state.showAllCourses = !state.showAllCourses;
+    },
+
+    // Reset course view to start fresh (optional)
+    resetCourseView: (state) => {
+      state.showCourses = false;
+      state.showAllCourses = false;
+    },
+
+    // Load all courses initially (assuming they come from the backend)
+    setCourses: (state, action: PayloadAction<any[]>) => {
+      state.courses = action.payload;
+    },
+  },
 });
 
-export const { 
-    enrollInCourse, 
-    unenrollFromCourse, 
-    toggleCourseDisplay,
-    resetCourseView 
+export const {
+  enrollInCourse,
+  unenrollFromCourse,
+  toggleCourseDisplay,
+  toggleShowAllCourses,
+  resetCourseView,
+  setCourses,
 } = dashboardSlice.actions;
 
 export default dashboardSlice.reducer;
