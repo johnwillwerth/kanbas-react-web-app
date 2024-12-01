@@ -5,9 +5,15 @@ import { FaPencil } from "react-icons/fa6";
 import GreenCheckmark from "./GreenCheckmark";
 import ProtectedContent from "../../Account/ProtectedContent";
 
-export default function ModuleControlButtons(
-{ moduleId, deleteModule, editModule }: { moduleId: string; deleteModule: (moduleId: string) => void;
-  editModule: (moduleId: string) => void }) {
+export default function ModuleControlButtons({ 
+  moduleId, 
+  deleteModule, 
+  editModule,
+}: { 
+  moduleId: string; 
+  deleteModule: (moduleId: string) => void;
+  editModule: (moduleId: string) => void;
+}) {
 
   const handleDelete = () => {
     if (window.confirm("Are you sure you want to delete this module?")) {
@@ -17,14 +23,27 @@ export default function ModuleControlButtons(
 
   return (
     <div className="float-end">
+
       <ProtectedContent>
-        <FaPencil onClick={() => editModule(moduleId)} className="text-primary me-3" />
-        <FaTrash className="text-danger me-2 mb-1" onClick={handleDelete}/>
+        {/* Protected for faculty only */}
+        <FaPencil 
+          onClick={() => editModule(moduleId)} 
+          className="text-primary me-3" 
+        />
+
+        <FaTrash 
+          className="text-danger me-2 mb-1" 
+          onClick={handleDelete}
+        />
       </ProtectedContent>
-      <GreenCheckmark />
+
+      {/* <GreenCheckmark /> */}
+
       <ProtectedContent>
-        <BsPlus className="fs-4" />
+        {/* Protected for faculty only */}
+        <BsPlus className="fs-1" />
       </ProtectedContent>
+
       <IoEllipsisVertical className="fs-4" />
     </div>
 );}

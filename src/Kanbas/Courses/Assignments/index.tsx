@@ -74,7 +74,7 @@ export default function Assignments() {
 
                           <Link to={`/Kanbas/Courses/${assignment.course}/Assignments/${assignment._id}/Editor`} id="wd-course-assignment-editor-link"
                             className="list-group-item border border-0" style={{ padding: '0', marginBottom: '0.5rem' }}>
-                            <span style={{ fontWeight: 'bold', fontSize: '24px' }}>{`${assignment._id} - ${assignment.title}`}</span>
+                            <span style={{ fontWeight: 'bold', fontSize: '24px' }}>{`${assignment.title}`}</span>
                           </Link>
 
                           <div style={{ marginTop: '0.5rem' }}>
