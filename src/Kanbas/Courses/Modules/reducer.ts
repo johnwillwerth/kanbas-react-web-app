@@ -13,14 +13,15 @@ const modulesSlice = createSlice({
           _id: new Date().getTime().toString(),
           lessons: [],
           name: module.name,
-          //description: module.description,
+          description: module.description,
           course: module.course,
         };
         state.modules = [...state.modules, newModule] as any;
       },
 
       deleteModule: (state, { payload: moduleId }) => {
-        state.modules = state.modules.filter((m: any) => m._id !== moduleId);
+        state.modules = state.modules.filter((m: any) => 
+          m._id !== moduleId);
       },
 
       updateModule: (state, { payload: module }) => {

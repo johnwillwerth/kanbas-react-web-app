@@ -4,15 +4,27 @@ import { useSelector, useDispatch } from "react-redux";
 import * as coursesClient from "../client";
 import * as assignmentsClient from "./client";
 import ProtectedContent from '../../Account/ProtectedContent';
-import { setAssignments, addAssignment, updateAssignment, editAssignment } from "./reducer";
-import { fetchAssignment } from '../../../Labs/Lab5/client';
+import { setAssignments, addAssignment } from "./reducer";
 
 export default function AssignmentEditor() {
 
   const { cid, aid } = useParams();
   const { assignments } = useSelector((state: any) => state.assignmentReducer);
   // Find the relevant assignment based on both the course ID and assignment ID
-  const existingAssignment = assignments.find((a: any) => a.course === cid && a._id === aid);
+  const existingAssignment = assignments.find((a: any) => a.course === cid && a._id === aid); 
+
+  const saveAssignment = async () => {
+    try {
+        const savedAssignment = aid
+            ? await assignmentsClient.updateAssignment(assignment)
+            : await coursesClient.createAssignment(cid || "", assignment);
+        
+        dispatch(aid ? setAssignments(savedAssignment) : addAssignment(savedAssignment));
+        navigate(`/Kanbas/Courses/${cid}/Assignments`);
+    } catch (error) {
+        console.error("Failed to save the assignment:", error);
+    }
+  };
 
   const [assignment, setAssignment] = useState({
     title: existingAssignment?.title || "",
@@ -36,23 +48,6 @@ export default function AssignmentEditor() {
     setAssignment((prev) => ({ ...prev, [field]: value }));
   };
 
-  const saveAssignment = async (assignment: any) => {
-    if (!cid) return;
-    try {
-      if (aid) {
-        await assignmentsClient.updateAssignment(assignment);
-        dispatch(updateAssignment(assignment));
-      } else {
-        const newAssignment = { title: assignment.title, course: cid };
-        const createdAssignment = await coursesClient.createAssignment(cid, newAssignment);
-        dispatch(addAssignment(createdAssignment));
-        fetchAssignment();
-      }
-      navigate(`/Kanbas/Courses/${cid}/Assignments`);
-    } catch (error) {
-      console.error("Failed to save assignment:", error);
-    }
-  };
 
   // Fetch course assignment from server if it exists
   useEffect(() => {
@@ -219,19 +214,19 @@ export default function AssignmentEditor() {
                 <label htmlFor="wd-due-date" className="form-label">
                   <span style={{ fontWeight: 'bold' }}>Due</span>
                 </label>
-                <input id="wd-due-date" type="date" className="form-control" readOnly={currentUser.role === "STUDENT"} value={assignment.dueDate} 
+                <input id="wd-due-date" type="date" className="form-control" readOnly={currentUser.role === "STUDENT"} value={assignment.dueDate ? assignment.dueDate.split("T")[0] : ""} 
                   onChange={(e) => handleChange("dueDate", e.target.value)}/>
 
                 <label htmlFor="wd-available-from" className="form-label">
                   <span style={{ fontWeight: 'bold' }}>Available from</span>
                 </label>
-                <input id="wd-available-from" type="date" className="form-control" readOnly={currentUser.role === "STUDENT"} value={assignment.availableDate} 
+                <input id="wd-available-from" type="date" className="form-control" readOnly={currentUser.role === "STUDENT"} value={assignment.availableDate ? assignment.availableDate.split("T")[0] : ""} 
                   onChange={(e) => handleChange("availableDate", e.target.value)}/>
 
                 <label htmlFor="wd-available-until" className="form-label">
                   <span style={{ fontWeight: 'bold' }}>Until</span>
                 </label>
-                <input id="wd-available-until" type="date" className="form-control" readOnly={currentUser.role === "STUDENT"} value={assignment.dueDate} 
+                <input id="wd-available-until" type="date" className="form-control" readOnly={currentUser.role === "STUDENT"} value={assignment.dueDate ? assignment.dueDate.split("T")[0] : ""} 
                   onChange={(e) => handleChange("dueDate", e.target.value)}/>
               </div>
             </div>
@@ -240,23 +235,28 @@ export default function AssignmentEditor() {
       </div>
 
       <ProtectedContent>
+        {/* Protected for faculty only */}
         <div className="row">
           <div className="col-12 text-end mt-3">
               {/* Cancel and Save buttons */}
               <button 
-                  id="Cancel" 
-                  className="btn btn-secondary me-2" 
-                  onClick={() => navigate(`/Kanbas/Courses/${cid}/Assignments`)}>
-                  Cancel
+                type="button"
+                className="btn btn-secondary me-2" 
+                onClick={() => navigate(`/Kanbas/Courses/${cid}/Assignments`)}
+              >
+                Cancel
               </button>
               <button 
-                  id="Save" 
-                  className="btn btn-danger" 
-                  onClick={saveAssignment}>
-                  Save
+                onClick={saveAssignment}
+                type="button"
+                className="btn btn-danger" 
+              >
+                Save
               </button>
-          </div></div>
+          </div>
+        </div>
       </ProtectedContent>
+
     </div>
   );
 }

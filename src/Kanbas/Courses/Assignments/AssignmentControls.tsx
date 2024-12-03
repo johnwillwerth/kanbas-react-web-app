@@ -5,6 +5,7 @@ import { assignments } from "../../Database";
 import ProtectedContent from "../../Account/ProtectedContent";
 
 export default function AssignmentControls() {
+
   const navigate = useNavigate();
   const { cid, aid } = useParams(); // Extract course ID from URL parameters
   const assignment = assignments.find((assignment) => assignment._id === aid);
@@ -38,19 +39,25 @@ export default function AssignmentControls() {
         </span>
       </div>
 
-      {/* Buttons */}
       <ProtectedContent>
-      <div className="d-flex">
-        <button onClick={goToEditor} id="wd-add-assignment-btn" className="btn btn-lg btn-danger me-1">
-          <FaPlus className="position-relative me-2" style={{ bottom: "2px" }} />
-          Assignment
-        </button>
-        <button id="wd-add-group-btn" className="btn btn-lg btn-secondary me-1">
-          <FaPlus className="position-relative me-2" style={{ bottom: "2px" }} />
-          Group
-        </button>
-      </div>
+        {/* Protected for faculty only */}
+        <div className="d-flex">
+          <button onClick={goToEditor} 
+                  id="wd-add-assignment-btn" 
+                  className="btn btn-lg btn-danger me-1"
+          >
+            <FaPlus className="position-relative me-2" style={{ bottom: "2px" }} />
+            Assignment
+          </button>
+          <button id="wd-add-group-btn" 
+                  className="btn btn-lg btn-secondary me-1"
+          >
+            <FaPlus className="position-relative me-2" style={{ bottom: "2px" }} />
+            Group
+          </button>
+        </div>
       </ProtectedContent>
+
     </div>
   );
 }

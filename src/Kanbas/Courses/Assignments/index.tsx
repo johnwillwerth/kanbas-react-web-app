@@ -3,17 +3,48 @@ import AssignmentControlButtons from "./AssignmentControlButtons";
 import ProtectedContent from "../../Account/ProtectedContent";
 import * as coursesClient from "../client";
 import * as assignmentsClient from "./client";
-import { setAssignments, addAssignment, deleteAssignment, updateAssignment, editAssignment } from "./reducer";
-
 import { BsGripVertical, BsPlus } from "react-icons/bs";
+import { useSelector, useDispatch } from "react-redux";
 import { IoEllipsisVertical } from "react-icons/io5";
 import { PiNotePencilDuotone } from "react-icons/pi";
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
 import { Link, useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { 
+  addAssignment, 
+  deleteAssignment, 
+  setAssignments,   
+} from "./reducer";
 
 export default function Assignments() {
+
+  const { assignments } = useSelector((state: any) => state.assignmentReducer);
+  const { cid } = useParams();
+  const dispatch = useDispatch();
+  const [assignmentTitle, setAssignmentTitle] = useState("");
+
+  const createAssignment = async () => {
+    const newAssignment = await coursesClient.createAssignment(cid || "", {
+      title: assignmentTitle,
+      course: cid,
+    });
+    dispatch(addAssignment(newAssignment));
+    setAssignmentTitle("");
+  };
+
+  const fetchAssignments = async () => {
+    const assignments = await coursesClient.findAssignmentsForCourse(cid || "");
+    dispatch(setAssignments(assignments));
+  };
+
+  const removeAssignment = async (assignmentId: string) => {
+    const status = await assignmentsClient.deleteAssignment(assignmentId);
+    dispatch(deleteAssignment(assignmentId));
+  };
+
+  useEffect(() => {
+    fetchAssignments();
+  }, [cid]);
 
   // Toggle assignment list open/closed
   const [isOpen, setIsOpen] = useState(true);
@@ -21,29 +52,13 @@ export default function Assignments() {
     setIsOpen(!isOpen);
   };
 
-  const { cid } = useParams();
-  const { assignments } = useSelector((state: any) => state.assignmentReducer);
-  const dispatch = useDispatch();
-
-  const removeAssignment = async (assignmentId: string) => {
-    await assignmentsClient.deleteAssignment(assignmentId);
-    dispatch(deleteAssignment(assignmentId));
-  };
-
-  // Fetch course assignments from server
-  const fetchAssignments = async () => {
-    const assignments = await coursesClient.findAssignmentsForCourse(cid as string);
-    dispatch(setAssignments(assignments));
-  };
-  useEffect(() => {
-    fetchAssignments();
-  }, []);
-
   return (
     <div id="wd-assignments">
       <div className="container">
         <AssignmentControls />
-        <br /><br /><br /><br />
+        <br />
+        <br />
+        <br />
         <ul id="wd-assignment-list" className="list-group">
           <li className="wd-assignment list-group-item p-0 mb-5 fs-5 border-gray">
             <div className="wd-title p-3 ps-2 bg-secondary d-flex justify-content-between align-items-center">
@@ -61,12 +76,15 @@ export default function Assignments() {
 
             {/* Only render this part when isOpen is true */}
             {isOpen && (
-              <ul className="wd-assignment list-group rounded-0">
+              <ul id="wd-assignments" className="wd-assignment list-group rounded-0">
                 {assignments.length > 0 ? (
                   assignments.map((assignment: any) => (
                     <li key={assignment._id} className="wd-lesson list-group-item p-3 ps-1 border-gray">
                       <div className="d-flex align-items-center">
                         <BsGripVertical className="me-2 fs-3" />
+                        
+
+                        
                         <button className="btn btn-md btn-outline-none me-3 text-start" style={{ backgroundColor: 'transparent' }}>
                           <PiNotePencilDuotone className="me-2 fs-5" />
                         </button>
@@ -80,14 +98,16 @@ export default function Assignments() {
                           <div style={{ marginTop: '0.5rem' }}>
                             <span style={{ fontWeight: 'bold', color: 'red' }}>Multiple Modules</span> |
                             <span style={{ fontWeight: 'bold' }}> Not available until </span>
-                            {assignment.availDate} at 12:00am |
+                            {assignment.availDate ? assignment.availDate.split("T")[0] : ""} at 12:00am |
                             <br />
-                            <span style={{ fontWeight: 'bold' }}>Due</span> {assignment.dueDate} at 11:59pm | {assignment.points} pts
+                            <span style={{ fontWeight: 'bold' }}>Due</span> {assignment.dueDate ? assignment.dueDate.split("T")[0] : ""} at 11:59pm | {assignment.points} pts
                           </div>
                         </span>
                       </div>
-                      <AssignmentControlButtons assignmentId={assignment._id}
-                        deleteAssignment={(assignmentId) => removeAssignment(assignmentId)} />
+                      <AssignmentControlButtons
+                        deleteAssignment={(assignmentId) => removeAssignment(assignmentId)}
+                        assignmentId={assignment._id}
+                      />
                     </li>
                   ))
                 ) : (
