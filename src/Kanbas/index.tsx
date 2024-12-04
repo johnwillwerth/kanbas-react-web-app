@@ -64,9 +64,9 @@ export default function Kanbas() {
 
   const updateEnrollment = async (courseId: string, enrolled: boolean) => {
     if (enrolled) {
-      await courseClient.enrollUserInCourse(currentUser._id, courseId);
+      await userClient.enrollIntoCourse(currentUser._id, courseId);
     } else {
-      await courseClient.unenrollUserInCourse(currentUser._id, courseId);
+      await userClient.unenrollFromCourse(currentUser._id, courseId);
     }
     setCourses(
       courses.map((course) => {
