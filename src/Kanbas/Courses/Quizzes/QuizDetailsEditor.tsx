@@ -30,6 +30,7 @@ export default function QuizDetailsEditor() {
   const [quizOneQuestion, setQuizOneQuestion          ] = useState(true);
   const [quizWebcam, setQuizWebcam                    ] = useState(false);
   const [quizLockQuestions, setQuizLockQuestions      ] = useState(false);
+  const [quizPublished, setQuizPublished              ] = useState(false);
   const [quizDueDate, setQuizDueDate                  ] = useState<Date | null>(null);
   const [quizAvailDate, setQuizAvailDate              ] = useState<Date | null>(null);
   const [quizUntilDate, setQuizUntilDate              ] = useState<Date | null>(null);
@@ -51,6 +52,7 @@ export default function QuizDetailsEditor() {
       oneQuestion: quizOneQuestion,
       webcam: quizWebcam,
       lockQuestions: quizLockQuestions,
+      published: isPublishing,
       dueDate: quizDueDate,
       availDate: quizAvailDate,
       untilDate: quizUntilDate,
@@ -70,6 +72,7 @@ export default function QuizDetailsEditor() {
     setQuizOneQuestion(newQuiz.oneQuestion);
     setQuizWebcam(newQuiz.webcam);
     setQuizLockQuestions(newQuiz.lockQuestions);
+    setQuizPublished(newQuiz.published);
     setQuizDueDate(newQuiz.dueDate);
     setQuizAvailDate(newQuiz.availDate);
     setQuizUntilDate(newQuiz.untilDate);
@@ -111,6 +114,7 @@ export default function QuizDetailsEditor() {
       setQuizOneQuestion(existingQuiz.oneQuestion || true);
       setQuizWebcam(existingQuiz.webcam || false);
       setQuizLockQuestions(existingQuiz.lockQuestions || false);
+      setQuizPublished(existingQuiz.published || false);
       setQuizDueDate(existingQuiz.dueDate ? new Date(existingQuiz.dueDate) : null);
       setQuizAvailDate(existingQuiz.availDate ? new Date(existingQuiz.availDate) : null);
       setQuizUntilDate(existingQuiz.untilDate ? new Date(existingQuiz.untilDate) : null);

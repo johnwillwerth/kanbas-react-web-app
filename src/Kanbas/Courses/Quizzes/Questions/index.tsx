@@ -1,10 +1,10 @@
-import QuizQuestions from "./QuizQuestions";
+import QuestionList from "./QuestionList";
 
 export default function Questions() {
 
   return (
     <div>
-      <QuizQuestions />
+      <QuestionList />
     </div>
   )
 }

@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import QuizDetails from './QuizDetails';
-import QuizQuestions from './Questions/QuizQuestions';
+import QuizDetailsEditor from './QuizDetailsEditor';
+import QuestionList from './Questions/QuestionList';
 
-export default function QuizDetailsControls() {
+export default function QuizEditor() {
 
   const [activeTab, setActiveTab] = useState("Details");
 
@@ -32,8 +32,8 @@ export default function QuizDetailsControls() {
 
       {/* Conditional Rendering Based on Active Tab */}
       <div id="wd-tab-content" className="mt-4">
-        {activeTab === "Details" && <QuizDetails />}
-        {activeTab === "Questions" && <QuizQuestions />}
+        {activeTab === "Details" && <QuizDetailsEditor />}
+        {activeTab === "Questions" && <QuestionList />}
       </div>
     </div>
   );

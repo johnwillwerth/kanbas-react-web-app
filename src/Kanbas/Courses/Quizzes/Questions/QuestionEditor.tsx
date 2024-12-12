@@ -10,7 +10,7 @@ import {
   updateQuestion,
  } from './reducer';
 
-export default function QuizQuestionsEditor() {
+export default function QuestionEditor() {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();

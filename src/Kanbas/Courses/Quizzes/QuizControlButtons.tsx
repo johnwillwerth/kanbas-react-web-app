@@ -1,5 +1,7 @@
 import { IoEllipsisVertical } from "react-icons/io5";
 import { useNavigate, useParams } from "react-router-dom";
+import { IoMdCloseCircleOutline } from "react-icons/io";
+import GreenCheckmark from "./GreenCheckmark";
 import ProtectedContent from "../../Account/ProtectedContent";
 
 export default function QuizControlButtons({
@@ -27,7 +29,7 @@ export default function QuizControlButtons({
 
   const handleEdit = () => {
     editQuiz(quizId);
-    navigate(`/Kanbas/Courses/${cid}/Quizzes/${quizId}/Editor`);
+    navigate(`/Kanbas/Courses/${cid}/Quizzes/${quizId}/Details`);
   };
 
   const handleTogglePublish = () => {
@@ -35,17 +37,20 @@ export default function QuizControlButtons({
   };
 
   return (
-    <div className="float-end">
+    <div className="float-end" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+      {/* Quiz Status Icon */}
+      <div className="quiz-status">
+        {published ? <GreenCheckmark /> : <IoMdCloseCircleOutline />}
+      </div>
 
+      {/* Ellipsis Dropdown Button */}
       <ProtectedContent>
-        {/* Protected for faculty only */}   
         <button
           className="btn btn-light dropdown-toggle"
           type="button"
           id="dropdownMenuButton"
           data-bs-toggle="dropdown"
           aria-expanded="false"
-          style={{ marginLeft: "10px" }}
         >
           <IoEllipsisVertical className="fs-4" />
         </button>
@@ -71,12 +76,11 @@ export default function QuizControlButtons({
               className="dropdown-item" 
               onClick={handleTogglePublish}
             >
-              {published ? "Publish Quiz" : "Unpublish Quiz"}
+              {!published ? "Publish Quiz" : "Unpublish Quiz"}
             </button>
           </li>
         </ul>
       </ProtectedContent>
-
     </div>
   );
 }

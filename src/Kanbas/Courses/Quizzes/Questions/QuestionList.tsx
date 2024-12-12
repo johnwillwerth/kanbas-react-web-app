@@ -12,7 +12,7 @@ import {
   setQuestions,
 } from "./reducer";
 
-export default function QuizQuestions() {
+export default function QuestionList() {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
