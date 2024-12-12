@@ -16,18 +16,26 @@ import {
 } from "./reducer";
 
 export default function Modules() {
+
   const { modules } = useSelector((state: any) => state.moduleReducer);
   const { cid } = useParams();
   const dispatch = useDispatch();
-  const [moduleName, setModuleName] = useState("");
+
+  const [moduleName,        setModuleName]        = useState("");
+  const [moduleDescription, setModuleDescription] = useState("");
+  const [moduleLessons,     setModuleLessons]     = useState([]);
   
   const createModule = async () => {
     const newModule = await coursesClient.createModule(cid || "", {
-      name: moduleName,
-      course: cid,
+      name:        moduleName,
+      description: moduleDescription,
+      lessons:     moduleLessons,
+      course:      cid,
     });
     dispatch(addModule(newModule));
-    setModuleName("");
+    setModuleName(newModule.name);
+    setModuleDescription(newModule.description);
+    setModuleLessons(newModule.lessons);
   };
 
   const fetchModules = async () => {
@@ -39,11 +47,6 @@ export default function Modules() {
     const status = await modulesClient.deleteModule(moduleId);
     dispatch(deleteModule(moduleId));
   };
-
-  //const saveModule = async (module: any) => {
-    //await modulesClient.updateModule(module);
-    //dispatch(updateModule(module));
-  //};
   
   useEffect(() => {
     fetchModules();

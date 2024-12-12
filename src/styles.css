@@ -25,6 +25,7 @@ body * {  font-family: Arial, Helvetica, sans-serif;  }
   --bs-btn-border-color: #c7cdd1 !important;
   --bs-btn-hover-color: #fff !important;
 }
+
 .bg-secondary {
   --bs-secondary-rgb: 199, 205, 209;
 }
@@ -32,6 +33,9 @@ body * {  font-family: Arial, Helvetica, sans-serif;  }
   --bs-list-group-border-color: gray;
 }
 .wd-lesson {
+  border-left: 3px solid green !important;
+}
+.wd-quiz {
   border-left: 3px solid green !important;
 }
 
@@ -42,4 +46,104 @@ body * {  font-family: Arial, Helvetica, sans-serif;  }
   border: 2px solid black;
   border-radius: 50px; 
   color: black; 
+}
+
+.wd-quiz-details-editor {
+  max-width: 850px;
+}
+
+.ql-toolbar {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.ql-container {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  min-height: 200px;
+  padding: 10px;
+}
+
+.ql-editor {
+  min-height: 150px;
+  padding: 10px;
+}
+
+.spaced {
+  padding: 10px; /* Adjust the padding to your preference */
+}
+
+/* Table Styles */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ddd;  /* Light border for the table */
+}
+
+.table th, .table td {
+  padding: 12px 20px;  /* Add padding to cells for spacing */
+  text-align: left;  /* Align text to the left */
+}
+
+.table th {
+  background-color: #f8f9fa;  /* Light background for headers */
+  font-weight: bold;
+  border-bottom: 2px solid #ddd;  /* Border under the header */
+}
+
+.table td {
+  border-bottom: 1px solid #ddd;  /* Border between rows */
+}
+
+.availability {
+  margin-top: 20px;
+  font-size: 16px;  /* Make text size consistent */
+}
+
+.table tr:last-child td {
+  border-bottom: none;  /* Remove bottom border for the last row */
+}
+
+.quiz-details {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.quiz-details li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.label {
+  width: 200px; /* Adjust the width for proper label spacing */
+  font-weight: bold;
+  text-align: right;
+  margin-right: 15px; /* Space between label and value */
+  flex-shrink: 0; /* Prevents the label from shrinking */
+}
+
+.quiz-details li span {
+  text-align: left; /* Align the value text to the left */
+  flex-grow: 1; /* Makes sure the value takes up the remaining space */
+}
+
+.quiz-questions {
+  list-style-type: none;
+  padding: 0;
+}
+
+.wd-question {
+  margin-bottom: 1rem;
+}
+
+.choices-list {
+  list-style-type: lower-alpha;
+  padding-left: 1rem;
+}
+
+.choices-list li {
+  margin-bottom: 0.25rem;
 }

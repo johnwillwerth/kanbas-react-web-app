@@ -47,11 +47,13 @@ export default function Profile() {
           <input value={profile.firstName} 
                  id="wd-firstname" 
                  className="form-control mb-2"
+                 placeholder="First Name"
                  onChange={(e) => setProfile({ ...profile, firstName: e.target.value })}
           />
           <input value={profile.lastName} 
                  id="wd-lastname" 
                  className="form-control mb-2"
+                 placeholder="Last Name"
                  onChange={(e) => setProfile({ ...profile, lastName: e.target.value })}
           />
           <input value={profile.dob ? profile.dob.split('T')[0] : ""} 
@@ -63,6 +65,7 @@ export default function Profile() {
           <input value={profile.email} 
                  id="wd-email" 
                  className="form-control mb-2"
+                 placeholder="Email Address"
                  onChange={(e) => setProfile({ ...profile, email: e.target.value })}
           />
           <select value={profile.role || "USER"} 

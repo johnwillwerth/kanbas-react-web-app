@@ -36,7 +36,7 @@ export const findModulesForCourse = async (courseId: string) => {
   return response.data;
 };
 
-export const createAssignment = async (courseId: string, assignment: any) => {
+export const createAssignment = async (courseId: string, assignment: Partial<any>) => {
   const response = await axiosWithCredentials.post(
     `${COURSES_API}/${courseId}/assignments`, assignment);
   return response.data;
@@ -45,6 +45,42 @@ export const createAssignment = async (courseId: string, assignment: any) => {
 export const findAssignmentsForCourse = async (courseId: string) => {
   const response = await axiosWithCredentials.get(
     `${COURSES_API}/${courseId}/assignments`);
+  return response.data;
+};
+
+export const createQuiz = async (courseId: string, quiz: any) => {
+  const response = await axiosWithCredentials.post(
+    `${COURSES_API}/${courseId}/quizzes`, quiz);
+  return response.data;
+};
+
+export const findQuizzesForCourse = async (courseId: string) => {
+  const response = await axiosWithCredentials.get(
+    `${COURSES_API}/${courseId}/quizzes`);
+  return response.data;
+};
+
+export const createQuestion = async (courseId: string, quizId: string, question: any) => {
+  const response = await axiosWithCredentials.post(
+    `${COURSES_API}/${courseId}/quizzes/${quizId}/questions`, question);
+  return response.data;
+};
+
+export const findQuestionsForQuiz = async (courseId: string, quizId: string) => {
+  const response = await axiosWithCredentials.get(
+    `${COURSES_API}/${courseId}/quizzes/${quizId}/questions`);
+  return response.data;
+};
+
+export const findQuestionsByDifficulty = async (courseId: string, quizId: string, difficulty: string) => {
+  const response = await axiosWithCredentials.get(
+    `${COURSES_API}/${courseId}/quizzes/${quizId}/questions/${difficulty}`);
+  return response.data;
+};
+
+export const findQuestionsByType = async (courseId: string, quizId: string, type: string) => {
+  const response = await axiosWithCredentials.get(
+    `${COURSES_API}/${courseId}/quizzes/${quizId}/questions/${type}`);
   return response.data;
 };
 

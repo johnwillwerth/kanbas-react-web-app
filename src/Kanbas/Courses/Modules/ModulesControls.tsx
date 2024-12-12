@@ -9,7 +9,7 @@ export default function ModulesControls({
   addModule, 
 }: { 
   moduleName: string; 
-  setModuleName: (title: string) => void;
+  setModuleName: (name: string) => void;
   addModule: () => void; 
 }) {
 

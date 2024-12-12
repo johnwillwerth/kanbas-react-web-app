@@ -11,7 +11,7 @@ import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
 import { Link, useParams } from "react-router-dom";
 import { 
-  addAssignment, 
+  editAssignment,
   deleteAssignment, 
   setAssignments,   
 } from "./reducer";
@@ -21,16 +21,6 @@ export default function Assignments() {
   const { assignments } = useSelector((state: any) => state.assignmentReducer);
   const { cid } = useParams();
   const dispatch = useDispatch();
-  const [assignmentTitle, setAssignmentTitle] = useState("");
-
-  const createAssignment = async () => {
-    const newAssignment = await coursesClient.createAssignment(cid || "", {
-      title: assignmentTitle,
-      course: cid,
-    });
-    dispatch(addAssignment(newAssignment));
-    setAssignmentTitle("");
-  };
 
   const fetchAssignments = async () => {
     const assignments = await coursesClient.findAssignmentsForCourse(cid || "");
@@ -55,7 +45,7 @@ export default function Assignments() {
   return (
     <div id="wd-assignments">
       <div className="container">
-        <AssignmentControls />
+        <AssignmentControls/>
         <br />
         <br />
         <br />
@@ -82,9 +72,7 @@ export default function Assignments() {
                     <li key={assignment._id} className="wd-lesson list-group-item p-3 ps-1 border-gray">
                       <div className="d-flex align-items-center">
                         <BsGripVertical className="me-2 fs-3" />
-                        
 
-                        
                         <button className="btn btn-md btn-outline-none me-3 text-start" style={{ backgroundColor: 'transparent' }}>
                           <PiNotePencilDuotone className="me-2 fs-5" />
                         </button>
@@ -107,6 +95,7 @@ export default function Assignments() {
                       <AssignmentControlButtons
                         deleteAssignment={(assignmentId) => removeAssignment(assignmentId)}
                         assignmentId={assignment._id}
+                        editAssignment={() => dispatch(editAssignment(assignment._id))}
                       />
                     </li>
                   ))
